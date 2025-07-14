@@ -1,4 +1,4 @@
-# PDF_Grinder_API
+# PDF Grinder
 
 ## Docker Quick Commands
 
