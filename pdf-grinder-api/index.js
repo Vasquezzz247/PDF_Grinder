@@ -14,5 +14,5 @@ const pdfRoutes = require('./routes/pdf');
 app.use('/api', pdfRoutes);
 
 app.listen(PORT, () => {
-    console.log(`🚀 Server running on port ${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });
