@@ -9,8 +9,32 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
+    depends_on:
+      - pdf_grinder_db
     environment:
-      - PORT=3000
-      - UPLOAD_DIR=uploads
-      - MERGED_DIR=merged
+      - NODE_ENV=development
+    env_file:
+      - .env
+    command: npm run dev
     restart: unless-stopped
+
+  pdf_grinder_db:
+    image: postgres:15
+    container_name: pdf_grinder_db
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:
