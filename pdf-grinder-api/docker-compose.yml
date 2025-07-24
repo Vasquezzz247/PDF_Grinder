@@ -1,0 +1,40 @@
+version: '3.9'
+
+services:
+  pdf-grinder-api:
+    build: .
+    container_name: pdf-grinder-api
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      - pdf_grinder_db
+    environment:
+      - NODE_ENV=development
+    env_file:
+      - .env
+    command: npm run dev
+    restart: unless-stopped
+
+  pdf_grinder_db:
+    image: postgres:15
+    container_name: pdf_grinder_db
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:

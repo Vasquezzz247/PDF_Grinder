@@ -1,0 +1,22 @@
+# Node.js dependencies
+node_modules/
+
+# Uploads and merged files
+.env
+.env.*
+
+# Environment variables
+.DS_Store
+.idea/
+.vscode/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Operating system files
+Thumbs.db
+
+# Docker
+docker-compose.override.yml
