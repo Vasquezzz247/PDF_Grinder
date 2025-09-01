@@ -20,4 +20,4 @@ RUN mkdir -p uploads merged
 EXPOSE 3000
 
 # 8. Command to run the application
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "dev", "start"]
