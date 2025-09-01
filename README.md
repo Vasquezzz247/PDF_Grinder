@@ -20,3 +20,5 @@ docker-compose build --no-cache
 
 # Show logs
 docker-compose logs -f
+
+..
